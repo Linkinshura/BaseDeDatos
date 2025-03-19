@@ -23,3 +23,15 @@ Base de Datos a usar:
  -Escribir "mysql -u root practica_1"
 
 */
+
+SELECT nombre, poblacion FROM provincias WHERE poblacion > 15000000;
+
++--------------+-----------+
+| nombre       | poblacion |
++--------------+-----------+
+| Buenos Aires |  17541141 |
++--------------+-----------+
+1 row in set (0.000 sec)
+
+
+
