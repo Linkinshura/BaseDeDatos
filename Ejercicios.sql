@@ -30,3 +30,11 @@ SELECT capital FROM provincias WHERE nombre = "San Juan" OR nombre = "San Luis" 
 
 SELECT capital FROM provincias WHERE nombre IN ("San Juan", "San Luis", "Santa Cruz");
 
+9) Quiero la lista de provincias que desconocemos el nombre del Gobernador 
+
+SELECT nombre FROM provincias WHERE gobernador IS NULL;
+
+10) Ahora quiero la superficie de las provincias que su nombre termina con s
+
+SELECT nombre, superficie FROM provincias WHERE nombre LIKE "%s";
+
