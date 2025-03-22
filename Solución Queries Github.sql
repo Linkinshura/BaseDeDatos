@@ -65,7 +65,7 @@ SELECT nombre, capital FROM provincias WHERE nombre IN ('San Juan', 'San Luis', 
 SELECT nombre, YEAR(CURRENT_TIMESTAMP) - YEAR(autonoma_desde) AS autonoma_hace FROM provincias;
 
 -- 22
-SELECT CONCAT("Provincia de ", nombre) AS provincianFROM provincias
+SELECT CONCAT("Provincia de ", nombre) AS provincia FROM provincias
 WHERE capital IS NOT NULL;
 
 -- 23
