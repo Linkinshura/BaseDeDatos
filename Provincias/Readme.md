@@ -1,4 +1,4 @@
- # 2a) Entrar a la Base de Datos de provincias:
+ # Entrar a la Base de Datos de provincias:
 
  -Ingresar a la Shell una vez activado MySQL (no ingresar a MariaDB aun)
 
