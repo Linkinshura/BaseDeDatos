@@ -12,7 +12,7 @@ Este Repo es de Base de Datos en 4to 3ra
 Base de Datos a usar:
  https://github.com/santiagotrini/practica-1-queries
 
- 2) Entrar a la Base de Datos:
+ 2a) Entrar a la Base de Datos de provincias:
 
  -Ingresar a la Shell una vez activado MySQL (no ingresar a MariaDB aun)
 
@@ -25,3 +25,15 @@ Base de Datos a usar:
  -Escribir " mysql -u root < db_data.sql"
 
  -Escribir "mysql -u root practica_1"
+
+ 2b) Ingresar a la base de datos de escuela
+ 
+ -Clonar este repo git clone https://github.com/santiagotrini/queries-2023.
+
+ -Cambiar al directorio del repo cd practica-2-joins.
+
+ -Crear la base de datos mysql < db_schema.sql.
+
+ -Poblar la base de datos mysql < db_data.sql.
+
+ -Logearse a la base de datos mysql practica_2.
