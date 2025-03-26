@@ -3,7 +3,7 @@ Este Repo es de Base de Datos en 4to 3ra
 
 
 ## Tutorial:
-1) Iniciar el servidor MySQL:
+### 1) Iniciar el servidor MySQL:
 
 -En el Xampp se ingresa y se activa el MySQL y se accede a la Shell del mismo, NO se accede a Apache
 
@@ -12,7 +12,7 @@ Este Repo es de Base de Datos en 4to 3ra
 Base de Datos a usar:
  https://github.com/santiagotrini/practica-1-queries
 
- 2a) Entrar a la Base de Datos de provincias:
+ ### 2a) Entrar a la Base de Datos de provincias:
 
  -Ingresar a la Shell una vez activado MySQL (no ingresar a MariaDB aun)
 
@@ -26,7 +26,7 @@ Base de Datos a usar:
 
  -Escribir "mysql -u root practica_1"
 
- 2b) Ingresar a la base de datos de escuela
+ ### 2b) Ingresar a la base de datos de escuela
  
  -Clonar este repo git clone https://github.com/santiagotrini/queries-2023.
 
