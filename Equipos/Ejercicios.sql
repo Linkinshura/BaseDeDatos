@@ -83,7 +83,7 @@ SELECT SUM(socios)AS cantidad_socios FROM equipos;
 
 46) Mostrar todas las materias que se dictan a contraturno 
 
-SELECT nombre, contraturno FROM materias WHERE contraturno IS NOT NULL;
+SELECT nombre, contraturno FROM materias WHERE contraturno = 1;
 
 47) Mostrar la cantidad total de horas por semana que tiene un alumno de 4to computación 
 
