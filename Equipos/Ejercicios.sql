@@ -71,4 +71,20 @@ SELECT SUM(población) AS población FROM provincias;
 
 SELECT COUNT(*) AS cantidad_materias FROM materias WHERE curso = 4 AND esp = "Computación";
 
-6) 
+/* ejercicios de La35.net */
+
+44) Mostrar todas las materias de segundo año exceptuando las rotaciones de taller
+
+SELECT nombre FROM materias WHERE año = 2 AND rotacion IS NULL;
+
+45) Mostrar la cantidad total de socios entre todos los equipos de la Argentina 
+
+SELECT SUM(socios)AS cantidad_socios FROM equipos;
+
+46) Mostrar todas las materias que se dictan a comtraturmo 
+
+SELECT nombre, comtraturno FROM materias WHERE comtraturno IS NOT NULL;
+
+47) Mostrar la cantidad total de horas por semana que tiene un alumno de 4to computación 
+
+SELECT SUM(cant_horas)AS horas_totales FROM materias WHERE curso = 4 AND esp = "Computación";
