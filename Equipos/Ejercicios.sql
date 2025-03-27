@@ -42,3 +42,33 @@ SELECT nombre, capital, gobernador FROM provincias WHERE gobernador LIKE "%Juan%
 | Ciudad Autonoma de Buenos Aires | NULL                  | Horacio Rodriguez Larreta |
 +---------------------------------+-----------------------+---------------------------+
 5 rows in set (0.000 sec)
+
+/*
+27/03
+*/
+1) Mostrar la densidad de población de cada provincia 
+
+SELECT nombre, población, superficie, poblacion / superficie AS densidad_poblacion FROM provincias;
+
+2) Mostrar la cantidad de años que pasaron desde la fundación de cada equipo 
+
+SELECT nombre, YEAR(CURRENT_TIMESTAMP) - YEAR(fecha_fund) AS edad FROM equipos;
+
+3) Mostrar para cada provincia "<en provincia> gobierna <gobernador>"
+
+SELECT CONCAT("en", nombre, "gobierna", gobernador) FROM provincias;
+
+/*
+con PIPE (set sql_mode="PIPES_AS_CONCAT";)
+*/
+SELECT "En" || nombre || "gobierna" || gobernador FROM provincias;
+
+4) Mostrar cuanta gente vive en Argentina
+
+SELECT SUM(población) AS población FROM provincias;
+
+5) Mostrar cuantas materias hay en 4to computación 
+
+SELECT COUNT(*) AS cantidad_materias FROM materias WHERE curso = 4 AND esp = "Computación";
+
+6) 
