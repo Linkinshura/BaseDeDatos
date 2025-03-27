@@ -81,9 +81,9 @@ SELECT nombre FROM materias WHERE año = 2 AND rotacion IS NULL;
 
 SELECT SUM(socios)AS cantidad_socios FROM equipos;
 
-46) Mostrar todas las materias que se dictan a comtraturmo 
+46) Mostrar todas las materias que se dictan a contraturno 
 
-SELECT nombre, comtraturno FROM materias WHERE comtraturno IS NOT NULL;
+SELECT nombre, contraturno FROM materias WHERE contraturno IS NOT NULL;
 
 47) Mostrar la cantidad total de horas por semana que tiene un alumno de 4to computación 
 
