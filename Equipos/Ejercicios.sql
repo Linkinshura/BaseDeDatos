@@ -330,7 +330,9 @@ SELECT nombre, superficie, CONCAT("% ", (superficie / 2780403) * 100) AS porcent
 24 rows in set (0.000 sec)
 
 
-/* -- SELECT nombre, superficie, CONCAT("%", (SUM(superficie) / superficie))as porcentaje_superficie FROM provincias;
+/*
+Trini:
+ -- SELECT nombre, superficie, CONCAT("%", (SUM(superficie) / superficie))as porcentaje_superficie FROM provincias;
 -- Primer superficie total de la Argentina
   SELECT SUM(superficie) FROM provincias;
 -- Despues la query 28
