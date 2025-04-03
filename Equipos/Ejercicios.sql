@@ -562,3 +562,83 @@ SELECT nombre, contraturno FROM materias WHERE contraturno = 1;
 47) Mostrar la cantidad total de horas por semana que tiene un alumno de 4to computación 
 
 SELECT SUM(cant_horas)AS horas_totales FROM materias WHERE curso = 4 AND esp = "Computación";
+
+
+/*
+fin La35.net
+*/
+
+/*
+ABM
+*/
+
+1) Agregar 3 equipos de futbol del Nacional B
+
+INSERT INTO equipos VALUES
+(7, "Velez Sarfield", "Estadio Velez", "Buenos Aires", "1910-01-01", 80000, "Primera", 8),
+
+(8, "Ponechispas", "Estadio Viednamita", "La Pampa", "1958-9-11", 5001, "Nacional B"),
+
+
+(9, "La35", "Estadio Latzina", "Buenos Aires", "Buenos Aires", "2025-04-03");
+
+2) Agregar los datos que faltan de Boca
+
+INSERT INTO equipos (estadio, ciudad, cant_socios, division, campeonatos) VALUES
+("Estadio La bombonera", "Buenos Aires", 120000, "Primera");
+
+3) Actualizar los valores de los gobernadores 
+
+UPDATE provincias SET gobernador = "" WHERE nombre = "";
+
+UPDATE provincias SET gobernador = "" WHERE nombre = "";
+
+UPDATE provincias SET gobernador = "" WHERE nombre = "";
+
+UPDATE provincias SET gobernador = "" WHERE nombre = "";
+
+UPDATE provincias SET gobernador = "" WHERE nombre = "";
+
+UPDATE provincias SET gobernador = "" WHERE nombre = "";
+
+UPDATE provincias SET gobernador = "" WHERE nombre = "";
+
+UPDATE provincias SET gobernador = "" WHERE nombre = "";
+
+UPDATE provincias SET gobernador = "" WHERE nombre = "";
+
+UPDATE provincias SET gobernador = "" WHERE nombre = "";
+
+UPDATE provincias SET gobernador = "" WHERE nombre = "";
+
+UPDATE provincias SET gobernador = "" WHERE nombre = "";
+
+UPDATE provincias SET gobernador = "" WHERE nombre = "";
+
+UPDATE provincias SET gobernador = "" WHERE nombre = "";
+
+
+4) Agregar a Uruguay 
+
+INSERT INTO provincias VALUES 
+("Uruguay", "Montevideo", 20000000, "Francescoli");
+
+5) Restarle el 10% de población a las provincias de Cuyo por el terremoto
+
+UPDATE provincias SET población= poblacion * 0.9 WHERE nombre IN (Mendoza, San Juan, San Luis);
+
+
+6)Borrar la provincia de Cordoba porque ya se independizo
+
+DELETE FROM provincias WHERE nombre = "Córdoba";
+
+7) Eliminar todos los clubes con menos de 5000 socios
+
+DELETE FROM equipos WHERE cant_socios < 5000;
+
+8) Agregar un campeonato a Newells
+
+UPDATE equipos
+SET campeonatos = 9
+WHERE nombre = "Newells";
+
