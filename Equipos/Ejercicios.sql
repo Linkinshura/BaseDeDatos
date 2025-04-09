@@ -575,17 +575,19 @@ ABM
 1) Agregar 3 equipos de futbol del Nacional B
 
 INSERT INTO equipos VALUES
-(7, "Velez Sarfield", "Estadio Velez", "Buenos Aires", "1910-01-01", 80000, "Primera", 8),
+
+(6, "La35", "Estadio Latzina", "Buenos Aires", "Buenos Aires", "2025-04-03", 69696, "Nacional B", 0);
+
+(7, "Velez Sarfield", "Estadio Velez", "Buenos Aires", "1910-01-01", 80000, "Nacional B", 8),
 
 (8, "Ponechispas", "Estadio Viednamita", "La Pampa", "1958-9-11", 5001, "Nacional B", 51),
 
 
-(6, "La35", "Estadio Latzina", "Buenos Aires", "Buenos Aires", "2025-04-03", 69696, 0);
+
 
 2) Agregar los datos que faltan de Boca
 
-INSERT INTO equipos VALUES
-    -> (9, "Boca Juniors", "La bombonera", "Buenos Aires", "1905-04-05", 120000, "Primera", 100);
+INSERT INTO equipos VALUES (9, "Boca Juniors", "La bombonera", "Buenos Aires", "1905-04-05", 120000, "Primera", 100);
 
 3) Actualizar los valores de los gobernadores 
 
@@ -617,16 +619,13 @@ UPDATE provincias SET gobernador = "Javier Milei" WHERE nombre = "Ciudad Autonom
 4) Agregar a Uruguay 
 
 INSERT INTO provincias VALUES 
-("Uruguay", "Montevideo", 20000000, "Francescoli");
 
-(25, "Uruguay", "Montevideo", "Francescoli", 20000, 52000, "1820-03-19");
+(25, "Uruguay", "Montevideo", "Yamandu Orsi", 3400263, 176215, "1820-03-19");
 
 
 5) Restarle el 10% de población a las provincias de Cuyo por el terremoto
 
-UPDATE provincias SET población= poblacion * 0.9 WHERE nombre IN (Mendoza, San Juan, San Luis);
-
-UPDATE provincias SET población= poblacion * 0.9 WHERE nombre IN ("Mendoza", "San Juan", "San Luis");
+UPDATE provincias SET población = poblacion * 0.9 WHERE nombre IN ("Mendoza", "San Juan", "San Luis");
 
 
 
@@ -639,5 +638,5 @@ DELETE FROM provincias WHERE nombre = "Córdoba";
 DELETE FROM equipos WHERE cant_socios < 5000;
 
 8) Agregar un campeonato a Newells
-UPDATE equipos SET campeonatos = 9 WHERE nombre = "Newells";
+UPDATE equipos SET campeonatos = campeonatos + 1 WHERE nombre = "Newells";
 
