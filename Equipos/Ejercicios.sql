@@ -577,64 +577,41 @@ ABM
 INSERT INTO equipos VALUES
 (7, "Velez Sarfield", "Estadio Velez", "Buenos Aires", "1910-01-01", 80000, "Primera", 8),
 
-(8, "Ponechispas", "Estadio Viednamita", "La Pampa", "1958-9-11", 5001, "Nacional B"),
+(8, "Ponechispas", "Estadio Viednamita", "La Pampa", "1958-9-11", 5001, "Nacional B", 51),
 
 
-(9, "La35", "Estadio Latzina", "Buenos Aires", "Buenos Aires", "2025-04-03");
+(6, "La35", "Estadio Latzina", "Buenos Aires", "Buenos Aires", "2025-04-03", 69696, 0);
 
 2) Agregar los datos que faltan de Boca
 
-INSERT INTO equipos (estadio, ciudad, cant_socios, division, campeonatos) VALUES
-("Estadio La bombonera", "Buenos Aires", 120000, "Primera");
+INSERT INTO equipos VALUES
+    -> (9, "Boca Juniors", "La bombonera", "Buenos Aires", "1905-04-05", 120000, "Primera", 100);
 
 3) Actualizar los valores de los gobernadores 
 
 UPDATE provincias SET gobernador = "Axel Kicillof" WHERE nombre = "Buenos Aires";
-
 UPDATE provincias SET gobernador = "Raúl Jalil" WHERE nombre = "Catamarca";
-
 UPDATE provincias SET gobernador = "Jorge Capitanich" WHERE nombre = "Chaco";
-
 UPDATE provincias SET gobernador = "Ignacio Torres" WHERE nombre = "Chubut";
-
 UPDATE provincias SET gobernador = "Juan Schiaretti" WHERE nombre = "Cordoba";
-
 UPDATE provincias SET gobernador = "Gustavo Valdés" WHERE nombre = "Corrientes";
-
 UPDATE provincias SET gobernador = "Gustavo Bordet" WHERE nombre = "Entre Rios";
-
 UPDATE provincias SET gobernador = "Gildo Insfrán" WHERE nombre = "Formosa";
-
 UPDATE provincias SET gobernador = "Gerardo Morales" WHERE nombre = "Jujuy";
-
 UPDATE provincias SET gobernador = "Sergio Ziliotto" WHERE nombre = "La Pampa";
-
 UPDATE provincias SET gobernador = "Ricardo Quintela" WHERE nombre = "La Rioja";
-
 UPDATE provincias SET gobernador = "Rodrigo Suárez" WHERE nombre = "Mendoza";
-
 UPDATE provincias SET gobernador = "Oscar Herrera Ahuad" WHERE nombre = "Misiones";
-
 UPDATE provincias SET gobernador = "Omar Gutiérrez" WHERE nombre = "Neuquen";
-
 UPDATE provincias SET gobernador = "Alberto Weretilneck" WHERE nombre = "Rio Negro";
-
 UPDATE provincias SET gobernador = "Gustavo Sáenz" WHERE nombre = "Salta";
-
 UPDATE provincias SET gobernador = "Sergio Uñac" WHERE nombre = "San Juan";
-
 UPDATE provincias SET gobernador = "Alberto Rodríguez Saá" WHERE nombre = "San Luis";
-
 UPDATE provincias SET gobernador = "Alicia Kirchner" WHERE nombre = "Santa Cruz";
-
 UPDATE provincias SET gobernador = "Maximiliano Pullaro" WHERE nombre = "Santa Fe";
-
 UPDATE provincias SET gobernador = "Gerardo Zamora" WHERE nombre = "Santiago del Estero";
-
 UPDATE provincias SET gobernador = "Gustavo Melella" WHERE nombre = "Tierra del Fuego, Antartida e Islas del Atlantico Sur";
-
 UPDATE provincias SET gobernador = "Osvaldo Jaldo" WHERE nombre = "Tucuman";
-
 UPDATE provincias SET gobernador = "Javier Milei" WHERE nombre = "Ciudad Autonoma de Buenos Aires";
 
 4) Agregar a Uruguay 
@@ -642,9 +619,15 @@ UPDATE provincias SET gobernador = "Javier Milei" WHERE nombre = "Ciudad Autonom
 INSERT INTO provincias VALUES 
 ("Uruguay", "Montevideo", 20000000, "Francescoli");
 
+(25, "Uruguay", "Montevideo", "Francescoli", 20000, 52000, "1820-03-19");
+
+
 5) Restarle el 10% de población a las provincias de Cuyo por el terremoto
 
 UPDATE provincias SET población= poblacion * 0.9 WHERE nombre IN (Mendoza, San Juan, San Luis);
+
+UPDATE provincias SET población= poblacion * 0.9 WHERE nombre IN ("Mendoza", "San Juan", "San Luis");
+
 
 
 6)Borrar la provincia de Cordoba porque ya se independizo
@@ -656,8 +639,5 @@ DELETE FROM provincias WHERE nombre = "Córdoba";
 DELETE FROM equipos WHERE cant_socios < 5000;
 
 8) Agregar un campeonato a Newells
-
-UPDATE equipos
-SET campeonatos = 9
-WHERE nombre = "Newells";
+UPDATE equipos SET campeonatos = 9 WHERE nombre = "Newells";
 
