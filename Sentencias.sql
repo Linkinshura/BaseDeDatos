@@ -1,4 +1,16 @@
-DESCRIBE: te muestra los datos de los atributos de cada materia 
+DESCRIBE: te muestra los datos de los atributos de cada tabla:
+
+-nombre(denominado "field")
+
+-tipo de dato(denominado "Type")
+
+-Nulo(denominado "NULL")
+
+-tipo de llave(denominado "Key")
+
+-valor por defecto(denominado "Default")
+
+-extra(denominado "extra")
 
 DESCRIBE "tabla";
 
