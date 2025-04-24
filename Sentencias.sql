@@ -46,3 +46,27 @@ SELECT "atributo" FROM "tabla";
 TRUNCATE: Borra los atributos 
 
 TRUNCATE "tabla";
+
+
+Calculos:
+
+
+-SUM:suma todos los registros (si hay condiciones suma losnque cumplen esa condición 
+
+SELECT SUM("atributo") FROM "tabla";
+
+-MIN:muestra el valor minimo presente de ese atributo
+
+SELECT MIN("atributo") FROM "tabla";
+
+-MAX: muestra el valor maximo de ese atributo
+
+SELECT MAX("atributo") FROM "tabla";
+
+-COUNT: muestra la cantidad de registros(filas) de ese atributo
+
+SELECT COUNT("atributo") FROM "tabla";
+
+-AVG: muewtra el promedio de todos los registros (si hay condiciones muestra el promedio de los que cumplen esas condiciones)
+
+SELECT AVG("atributo") FROM "tabla";
