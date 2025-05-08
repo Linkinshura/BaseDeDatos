@@ -70,3 +70,23 @@ SELECT COUNT("atributo") FROM "tabla";
 -AVG: muewtra el promedio de todos los registros (si hay condiciones muestra el promedio de los que cumplen esas condiciones)
 
 SELECT AVG("atributo") FROM "tabla";
+
+
+
+
+CREATE: permite crear tablas o base de datos(TABLE, DATABASE)
+
+CREATE DATABASE Escuela;
+
+CREATE TABLE Alummos(
+// columna - tipo - restricciones 
+nombre VARCHAR(255) NOT NULL,
+fecha_nac DATE NOT NULL,
+DNI IMT UNSIGNED PRIMARY KEY
+);
+
+NOT NULL = permite que los registros de esa columna tengan algo y evita que sean nulos
+
+PRIMARY KEY= clave primaria de la tabla( unica e irrepetible)
+
+UNSIGNED = sirve para el INT para evitar que ingrese numeros negativos 
