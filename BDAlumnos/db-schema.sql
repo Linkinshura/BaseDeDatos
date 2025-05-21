@@ -22,8 +22,6 @@ CREATE TABLE telefonos (
 );
 
 
-
-
 CREATE TABLE materias (
     id INT UNSIGNED PRIMARY KEY,
     nombre VARCHAR(50) NOT NULL,
@@ -31,9 +29,6 @@ CREATE TABLE materias (
     anio INT UNSIGNED NOT NULL,
     especialidad VARCHAR(50) 
 );
-
-
-
 
 
 CREATE TABLE notas (
