@@ -41,3 +41,16 @@ CREATE TABLE notas (
     FOREIGN KEY (alumno) REFERENCES alumnos(DNI), 
     FOREIGN KEY (materia) REFERENCES materias(id) 
 );
+
+CREATE TABLE profesores (
+CUIL INT PRIMARY KEY,
+DNI INT UNSIGNED NOT NULL,
+mail VARCHAR(50),
+tel INT UNSIGNED,
+nombres VARCHAR(20) NOT NULL,
+apellidos VARCHAR(20) NOT NULL,
+f_nac DATE NOT NULL,
+turnos VARCHAR(100)
+);
+
+ALTER TABLE materias ADD COLUMN profesor INT;
