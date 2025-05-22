@@ -55,6 +55,4 @@ turnos VARCHAR(100)
 
 ALTER TABLE materias ADD COLUMN profesor INT;
 
-ALTER TABLE materias
-ADD CONSTRAINT fk_profesor
-FOREIGN KEY (profesor) REFERENCES profesores(CUIL);
+ALTER TABLE materias ADD CONSTRAINT fk_profesor FOREIGN KEY (profesor) REFERENCES profesores(CUIL);
