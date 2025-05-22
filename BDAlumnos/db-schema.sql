@@ -1,6 +1,6 @@
-CREATE DATABASE OliverSykes;
+CREATE DATABASE Escuela;
 
-USE OliverSykes;
+USE Escuela;
 
 CREATE TABLE alumnos (
     DNI INT UNSIGNED PRIMARY KEY,
@@ -9,7 +9,7 @@ CREATE TABLE alumnos (
     fecha_nac DATE NOT NULL,
     curso INT UNSIGNED,
     division INT UNSIGNED,
-    especialidad VARCHAR(50)  
+    especialidad ENUM("Computación", "Automotores", "Ciclo Básico") DEFAULT "Ciclo básico"
 );
 
 
@@ -27,7 +27,7 @@ CREATE TABLE materias (
     nombre VARCHAR(50) NOT NULL,
     horas INT UNSIGNED NOT NULL,
     anio INT UNSIGNED NOT NULL,
-    especialidad VARCHAR(50) 
+    especialidad ENUM("Computación", "Automotores", "Ciclo Básico") DEFAULT "Ciclo básico"
 );
 
 
