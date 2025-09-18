@@ -1,4 +1,4 @@
-USE practica_2;
+USE practica_6;
 
 INSERT INTO provincias(nombre, capital, gobernador, poblacion, superficie, autonoma_desde) VALUES
 ('Buenos Aires', 'La Plata', 'Axel Kicillof', 17541141, 307571, '1820-02-11'),
@@ -136,3 +136,35 @@ WHERE nombre IN ('Santa Fe', 'Cordoba', 'Buenos Aires', 'Ciudad Autonoma de Buen
 UPDATE provincias
 SET region = 'Chaco'
 WHERE nombre IN ('Chaco', 'Formosa');
+
+INSERT INTO equipos VALUES
+(1, "Newells", "Rosario", "1903-11-03", "Primera", 6),
+(2, "Ferro", "Buenos Aires", "1904-07-28", "Nacional B", 2),
+(3, "Banfield", "Banfield", "1896-01-21", "Primera", 1),
+(4, "Estudiantes", "La Plata", "1905-08-04", "Primera", 6),
+(5, "Gimnasia", "La Plata", "1887-06-03", "Primera", 1);
+
+INSERT INTO jugadores VALUES
+(1, "Leonel", "Vangioni", 177, 35, "DEF", 1),
+(2, "Mariano", "Andujar", 194, 38, "ARQ", 4),
+(3, "Diario", "Cvitanich", 172, 38, "DEL", 3),
+(4, "Brahian", "Aleman", 178, 32, "MED", 5);
+
+INSERT INTO materias VALUES
+(1, "Algoritmos", 4, "Computacion", 9, 1, NULL),
+(2, "Biologia", 2, "Ciclo Basico", 2, 0, NULL),
+(3, "Matematica", 4, "Computacion", 4, 0, NULL),
+(4, "Taller", 3, "Computacion", 9, 1, "Redes"),
+(5, "Lengua", 4, "Automotores", 3, 0, NULL);
+
+INSERT INTO alumnos VALUES
+(1, 42123123, "Juan", "Gonzales", 4, "Computacion"),
+(2, 43200110, "Jorge", "Perez", 4, "Computacion"),
+(3, 46123456, "Maria", "Rodriguez", 3, "Automotores"),
+(4, 47000123, "Pedro", "Garcia", 2, "Ciclo Basico");
+
+INSERT INTO notas VALUES
+(1, 1, 1, 10),
+(2, 2, 1, 5),
+(3, 2, 2, 2),
+(4, 3, 2, 7);
