@@ -100,6 +100,7 @@ CREATE TABLE notas(
     alumno INT UNSIGNED NOT NULL,
     materia INT UNSIGNED NOT NULL,
     nota INT UNSIGNED NOT NULL,
-    FOREIGN KEY(alumno) REFERENCES alumnos(id)
+    FOREIGN KEY(alumno) REFERENCES alumnos(id),
     FOREIGN KEY(materia) REFERENCES materias(id)
 );
+
