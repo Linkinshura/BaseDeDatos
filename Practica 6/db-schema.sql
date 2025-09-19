@@ -10,7 +10,7 @@ CREATE TABLE provincias (
   gobernador VARCHAR(60),
   poblacion INT,
   superficie INT,
-  region VARCGAR(40) NOT NULL,
+  region VARCHAR(40) NOT NULL,
   autonoma_desde DATE
 );
 
@@ -103,5 +103,6 @@ CREATE TABLE notas(
     FOREIGN KEY(alumno) REFERENCES alumnos(id),
     FOREIGN KEY(materia) REFERENCES materias(id)
 );
+
 
 
