@@ -2,14 +2,20 @@
 1) Buscar todos los apellidos de la tabla clientes, sin repetir filas
 */
 
-SELECT apellidos FROM clientes;
+SELECT DISTINCT apellido
+FROM clientes;
+
 
 
 /*
 2) Dar una lista de los clientes indicando: nombre, apellido y nombre de ciudad.
 */
 
-SELECT c.nombre, c.apellido, ci.nombre FROM clientes as c INNER JOIN ciudades as ci ON (c.localidad = ci.id);
+SELECT c.nombre AS cliente_nombre, 
+       c.apellido AS cliente_apellido, 
+       ci.nombre AS ciudad_nombre
+FROM clientes c
+JOIN ciudades ci ON c.localidad = ci.id;
 
 /*
 3) Buscar las ciudades de la provincia de Cordoba.
@@ -21,17 +27,43 @@ SELECT ci.* FROM ciudades as ci INNER JOIN provincias as p ON (ci.provincia = p.
 4) Indicar fecha y hora de las ventas de biromes azules.
 */
 
+SELECT co.fecha
+FROM compras co
+JOIN productos p ON co.producto = p.id
+WHERE p.descripcion = 'birome azul';
+
 /*
 5) ¿Cuantas biromes azules se vendieron?
 */
+
+SELECT SUM(co.cant) AS total_biromes_azules
+FROM compras co
+JOIN productos p ON co.producto = p.id
+WHERE p.descripcion = 'birome azul';
+
 
 /*
 6) Buscar las ciudades con mas de 500000 habitantes, indicando nombre, provincia y poblacion.
 */
 
+SELECT c.nombre AS ciudad_nombre, 
+       p.nombre AS provincia_nombre, 
+       c.poblacion
+FROM ciudades c
+JOIN provincias p ON c.provincia = p.id
+WHERE c.poblacion > 500000;
+
+
 /*
 7) Indicar el total gastado en cada compra.
 */
+
+SELECT co.id AS compra_id, 
+       SUM(co.cant * p.precio) AS total_gastado
+FROM compras co
+JOIN productos p ON co.producto = p.id
+GROUP BY co.id;
+
 
 /*
 8) Escribir una query que produzca el siguiente listado.
