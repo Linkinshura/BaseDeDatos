@@ -655,6 +655,19 @@ ORDER BY
 automotores.
 */
 
+SELECT 
+    m.curso AS "Año", 
+    COUNT(m.id) AS "Cantidad de Materias"
+FROM 
+    materias m
+WHERE 
+    (m.curso BETWEEN 3 AND 6 AND 
+    (m.esp = 'Computacion' OR m.esp = 'Automotor')) 
+    OR m.curso NOT BETWEEN 3 AND 6
+GROUP BY 
+    m.curso
+ORDER BY 
+    m.curso;
 
 /*
 42) Crear un listado con la nota final de cada materia para cada alumno. La nota final es el promedio de todas las
