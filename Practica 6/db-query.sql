@@ -619,49 +619,205 @@ GROUP BY
 39) Mostrar la compra promedio por cliente indicando nombre y apellido del cliente.
 */
 
+SELECT 
+    c.nombre AS "Nombre", 
+    c.apellido AS "Apellido", 
+    AVG(p.precio * i.cantidad) AS "Compra Promedio"
+FROM 
+    clientes c
+JOIN 
+    compras co ON c.id = co.cliente_id
+JOIN 
+    items_compras i ON co.id = i.compra_id
+JOIN 
+    productos p ON i.producto_id = p.id
+GROUP BY 
+    c.id;
+
 /*
 40) Mostrar la altitud promedio de las ciudades de cada provincia, ordenar por nombre de provincia.
 */
+
+SELECT 
+    p.nombre AS "Provincia", 
+    AVG(c.altitud) AS "Altitud Promedio"
+FROM 
+    provincias p
+JOIN 
+    ciudades c ON p.id = c.provincia_id
+GROUP BY 
+    p.nombre
+ORDER BY 
+    p.nombre;
 
 /*
 41) Contar la cantidad de materias por año, discriminando en el caso de tercero a sexto año entre computación y
 automotores.
 */
 
+
 /*
 42) Crear un listado con la nota final de cada materia para cada alumno. La nota final es el promedio de todas las
 notas parciales. Indicar nombre y apellido del alumno y nombre de la materia.
 */
 
+SELECT 
+    a.nombre AS "Nombre", 
+    a.apellido AS "Apellido", 
+    m.nombre AS "Materia", 
+    AVG(n.nota) AS "Nota Final"
+FROM 
+    alumnos a
+JOIN 
+    notas n ON a.dni = n.alumno_dni
+JOIN 
+    materias m ON n.materia_id = m.id
+GROUP BY 
+    a.dni, m.id;
+
 /*
 43) Agregar al listado anterior el curso y la especialidad.
 */
+
+SELECT 
+    a.nombre AS "Nombre", 
+    a.apellido AS "Apellido", 
+    m.nombre AS "Materia", 
+    AVG(n.nota) AS "Nota Final", 
+    a.curso AS "Curso", 
+    a.especialidad AS "Especialidad"
+FROM 
+    alumnos a
+JOIN 
+    notas n ON a.dni = n.alumno_dni
+JOIN 
+    materias m ON n.materia_id = m.id
+GROUP BY 
+    a.dni, m.id;
 
 /*
 44) Buscar el delantero más joven del Nacional B.
 */
 
+SELECT 
+    j.nombre AS "Nombre", 
+    j.apellido AS "Apellido", 
+    j.edad AS "Edad", 
+    e.nombre AS "Equipo"
+FROM 
+    jugadores j
+JOIN 
+    equipos e ON j.equipo_id = e.id
+WHERE 
+    e.division = 'Nacional B' AND j.posicion = 'Delantero'
+ORDER BY 
+    j.edad ASC
+LIMIT 1;
+
 /*
 45) Mostrar todas las ciudades de la provincia de Buenos Aires con más de cien mil habitantes.
 */
+
+SELECT 
+    c.nombre AS "Ciudad", 
+    c.poblacion AS "Población"
+FROM 
+    ciudades c
+JOIN 
+    provincias p ON c.provincia_id = p.id
+WHERE 
+    p.nombre = 'Buenos Aires' AND c.poblacion > 100000;
 
 /*
 46) Indicar la ciudad más antigua por región de la Argentina.
 */
 
+SELECT 
+    p.region AS "Región", 
+    c.nombre AS "Ciudad", 
+    MIN(c.fecha_fundacion) AS "Fecha de Fundación"
+FROM 
+    ciudades c
+JOIN 
+    provincias p ON c.provincia = p.id
+GROUP BY 
+    p.id
+ORDER BY 
+    p.nombre;
+
 /*
 47) Mostrar las materias cuya nota final sea menor a 6 y tengan 4 horas o más de Pedro García.
 */
+
+SELECT 
+    m.nombre AS "Materia", 
+    AVG(n.nota) AS "Nota Final", 
+    m.horas AS "Horas"
+FROM 
+    materias m
+JOIN 
+    notas n ON m.id = n.materia_id
+JOIN 
+    alumnos a ON n.alumno_dni = a.dni
+WHERE 
+    AVG(n.nota) < 6 AND m.horas >= 4 AND a.nombre = 'Pedro' AND a.apellido = 'García'
+GROUP BY 
+    m.id;
 
 /*
 48) Dar una lista indicando la cantidad de jugadores que tiene cada equipo.
 */
 
+SELECT 
+    e.nombre AS "Equipo", 
+    COUNT(j.id) AS "Cantidad de Jugadores"
+FROM 
+    equipos e
+JOIN 
+    jugadores j ON e.id = j.equipo_id
+GROUP BY 
+    e.nombre;
+
 /*
 49) Indicar fecha, hora, producto y nombre del cliente que hizo la compra más cara.
 */
+
+SELECT 
+    co.fecha AS "Fecha", 
+    co.hora AS "Hora", 
+    p.nombre AS "Producto", 
+    c.nombre AS "Cliente", 
+    c.apellido AS "Apellido", 
+    (i.precio * i.cantidad) AS "Total de la Compra"
+FROM 
+    compras co
+JOIN 
+    clientes c ON co.cliente_id = c.id
+JOIN 
+    items_compras i ON co.id = i.compra_id
+JOIN 
+    productos p ON i.producto_id = p.id
+ORDER BY 
+    (i.precio * i.cantidad) DESC
+LIMIT 1;
 
 /*
 50) Buscar el jugador más viejo del equipo más viejo. Indicar nombre de equipo, fecha de fundación, nombre del
 jugador y edad.
 */
+SELECT 
+    e.nombre AS "Equipo", 
+    e.fecha_fundacion AS "Fecha de Fundación", 
+    j.nombre AS "Jugador", 
+    j.apellido AS "Apellido", 
+    j.edad AS "Edad"
+FROM 
+    equipos e
+JOIN 
+    jugadores j ON e.id = j.equipo_id
+WHERE 
+    e.fecha_fundacion = (SELECT MIN(fecha_fundacion) FROM equipos)
+ORDER BY 
+    j.edad DESC
+LIMIT 1;
+
