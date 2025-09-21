@@ -90,9 +90,33 @@ GROUP BY co.id;
 +---------------------+--------------------+--------------------------------+--------+------+---------+
 */
 
+SELECT 
+    co.fecha AS "fecha y hora",
+    CONCAT(c.nombre, ' ', c.apellido) AS cliente,
+    p.descripcion AS item,
+    p.precio,
+    co.cant,
+    (co.cant * p.precio) AS total
+FROM 
+    compras co
+JOIN 
+    clientes c ON co.cliente = c.id
+JOIN 
+    productos p ON co.producto = p.id
+ORDER BY 
+    co.fecha;
+
 /*
 9) Indicar para cada compra el id de compra y la dirección de envío.
 */
+
+SELECT 
+    co.id AS "id de compra",
+    CONCAT(c.calle, ' ', c.altura) AS "direccion de envio"
+FROM 
+    compras co
+JOIN 
+    clientes c ON co.cliente = c.id;
 
 /*
 10) Escribir una query que produzca el siguiente listado.
@@ -119,17 +143,76 @@ GROUP BY co.id;
 +---------------------+---------------------+--------------------------------+--------+------+---------+
 */
 
+SELECT 
+    co.fecha AS "fecha y hora",
+    CONCAT(UPPER(c.apellido), ', ', INITCAP(c.nombre)) AS "cliente", 
+    p.descripcion AS "item", 
+    p.precio AS "precio", 
+    co.cant AS "cant", 
+    (p.precio * co.cant) AS "total"
+FROM 
+    compras co
+JOIN 
+    clientes c ON co.cliente = c.id
+JOIN 
+    productos p ON co.producto = p.id
+ORDER BY 
+    co.fecha;
+
 /*
 11) Continuando con la consulta del ejercicio anterior, mostrar el total que lleva gastado cada cliente.
 */
+
+SELECT 
+    CONCAT(UPPER(c.apellido), ', ', INITCAP(c.nombre)) AS "cliente", 
+    SUM(p.precio * co.cant) AS "total gastado"
+FROM 
+    compras co
+JOIN 
+    clientes c ON co.cliente = c.id
+JOIN 
+    productos p ON co.producto = p.id
+GROUP BY 
+    c.id
+ORDER BY 
+    "total gastado" DESC;
 
 /*
 12) ¿Cual es el cliente que gastó más?
 */
 
+SELECT 
+    CONCAT(UPPER(c.apellido), ', ', INITCAP(c.nombre)) AS "cliente", 
+    SUM(p.precio * co.cant) AS "total gastado"
+FROM 
+    compras co
+JOIN 
+    clientes c ON co.cliente = c.id
+JOIN 
+    productos p ON co.producto = p.id
+GROUP BY 
+    c.id
+ORDER BY 
+    "total gastado" DESC
+LIMIT 1;
+
 /*
 13) Dar los nombres de los clientes que gastaron $5000 o mas.
 */
+
+SELECT 
+    CONCAT(UPPER(c.apellido), ', ', INITCAP(c.nombre)) AS "cliente", 
+    SUM(p.precio * co.cant) AS "total gastado"
+FROM 
+    compras co
+JOIN 
+    clientes c ON co.cliente = c.id
+JOIN 
+    productos p ON co.producto = p.id
+GROUP BY 
+    c.id
+HAVING 
+    SUM(p.precio * co.cant) >= 5000;
 
 /*
 14) El correo necesita imprimir las etiquetas con el nombre del cliente y la dirección para cada envío. Dar una lista
@@ -137,105 +220,400 @@ con esos datos para cada compra ordenados por fecha. En una columna apellido y n
 el domicilio indicando: calle, altura, localidad y provincia.
 */
 
+SELECT 
+    CONCAT(UPPER(c.apellido), ', ', INITCAP(c.nombre)) AS "Apellido y Nombre", 
+    CONCAT(calle, ' ', altura, ', ', l.nombre, ', ', p.nombre) AS "Domicilio"
+FROM 
+    compras co
+JOIN 
+    clientes c ON co.cliente = c.id
+JOIN 
+    localidades l ON c.localidad = l.id
+JOIN 
+    provincias p ON l.provincia = p.id
+ORDER BY 
+    co.fecha;
+
 /*
 15) Indicar nombre de provincia y poblacion total de sus ciudades para la tabla ciudades. Mostrar solamente las
 provincias que sumen más de un millón de habitantes.
 */
 
+SELECT 
+    p.nombre AS "Provincia", 
+    SUM(c.poblacion) AS "Poblacion Total"
+FROM 
+    ciudades c
+JOIN 
+    provincias p ON c.provincia_id = p.id
+GROUP BY 
+    p.nombre
+HAVING 
+    SUM(c.poblacion) > 1000000;
+
 /*
 16) Mostrar las compras de Juan Perez ordenadas por fecha. Indicar artículo, precio, cantidad y total de la compra.
 */
+
+SELECT 
+    pr.nombre AS "Artículo", 
+    pr.precio AS "Precio", 
+    co.cant AS "Cantidad", 
+    (pr.precio * co.cant) AS "Total"
+FROM 
+    compras co
+JOIN 
+    clientes c ON co.cliente = c.id
+JOIN 
+    productos pr ON co.producto = pr.id
+WHERE 
+    c.nombre = 'Juan' AND c.apellido = 'Perez'
+ORDER BY 
+    co.fecha;
 
 /*
 17) Buscar el nombre y apellido de los clientes que viven en Santa Fe o Cordoba.
 */
 
+SELECT 
+    CONCAT(UPPER(c.apellido), ', ', INITCAP(c.nombre)) AS "Cliente"
+FROM 
+    clientes c
+JOIN 
+    localidades l ON c.localidad_id = l.id
+JOIN 
+    provincias p ON l.provincia_id = p.id
+WHERE 
+    p.nombre IN ('Santa Fe', 'Córdoba');
+
 /*
 18) Dar el total de población para cada región de la Argentina.
 */
+
+SELECT 
+    r.nombre AS "Región", 
+    SUM(c.poblacion) AS "Población Total"
+FROM 
+    ciudades c
+JOIN 
+    regiones r ON c.region_id = r.id
+GROUP BY 
+    r.nombre;
 
 /*
 19) Listar las regiones del país que no lleguen a tres millones de habitantes.
 */
 
+SELECT 
+    r.nombre AS "Región", 
+    SUM(c.poblacion) AS "Población Total"
+FROM 
+    ciudades c
+JOIN 
+    regiones r ON c.region_id = r.id
+GROUP BY 
+    r.nombre
+HAVING 
+    SUM(c.poblacion) < 3000000;
+
 /*
 20) Mostrar las compras de menos de mil pesos en un listado como el del ejercicio 10.
 */
 
+SELECT 
+    co.fecha AS "Fecha y Hora", 
+    c.nombre AS "Cliente", 
+    pr.nombre AS "Artículo", 
+    pr.precio AS "Precio", 
+    co.cant AS "Cantidad", 
+    (pr.precio * co.cant) AS "Total"
+FROM 
+    compras co
+JOIN 
+    clientes c ON co.cliente = c.id
+JOIN 
+    productos pr ON co.producto = pr.id
+WHERE 
+    (pr.precio * co.cant) < 1000
+ORDER BY 
+    co.fecha;
+
 /*
 21) Sumar la población de todas las ciudades de la tabla ciudades por region del país.
 */
+
+SELECT 
+    r.nombre AS "Región", 
+    SUM(c.poblacion) AS "Población Total"
+FROM 
+    ciudades c
+JOIN 
+    regiones r ON c.region_id = r.id
+GROUP BY 
+    r.nombre;
 
 /*
 22) Dar la lista de todas las compras como en el ejercicio 10, ordenando por apellido y nombre de manera ascendente
 y por total de la compra de manera descendente.
 */
 
+SELECT 
+    co.fecha AS "Fecha y Hora", 
+    c.apellido || ', ' || c.nombre AS "Cliente", 
+    pr.nombre AS "Artículo", 
+    pr.precio AS "Precio", 
+    co.cant AS "Cantidad", 
+    (pr.precio * co.cant) AS "Total"
+FROM 
+    compras co
+JOIN 
+    clientes c ON co.cliente = c.id
+JOIN 
+    productos pr ON co.producto = pr.id
+ORDER BY 
+    c.apellido ASC, c.nombre ASC, (pr.precio * co.cant) DESC;
+
 /*
 23) Contar la cantidad de ciudades en la tabla ciudades por provincia.
 */
+
+SELECT 
+    p.nombre AS "Provincia", 
+    COUNT(c.id) AS "Cantidad de Ciudades"
+FROM 
+    ciudades c
+JOIN 
+    provincias p ON c.provincia_id = p.id
+GROUP BY 
+    p.nombre;
 
 /*
 24) Buscar las regiones del país con cuatro o más provincias.
 */
 
+SELECT 
+    r.nombre AS "Región", 
+    COUNT(p.id) AS "Cantidad de Provincias"
+FROM 
+    regiones r
+JOIN 
+    provincias p ON r.id = p.region_id
+GROUP BY 
+    r.nombre
+HAVING 
+    COUNT(p.id) >= 4;
+
 /*
 25) Buscar las ciudades de la provincia de Santa Fe con más de quinientos mil habitantes.
 */
+
+SELECT 
+    c.nombre AS "Ciudad", 
+    c.poblacion AS "Población"
+FROM 
+    ciudades c
+JOIN 
+    provincias p ON c.provincia_id = p.id
+WHERE 
+    p.nombre = 'Santa Fe' 
+    AND c.poblacion > 500000;
 
 /*
 26) ¿Cuántas resmas A4 se vendieron?
 */
 
+SELECT 
+    SUM(co.cant) AS "Total Resmas A4 Vendidas"
+FROM 
+    compras co
+JOIN 
+    productos pr ON co.producto = pr.id
+WHERE 
+    pr.nombre = 'Resma A4';
+
 /*
 27) Indicar el total gastado en cada compra.
 */
 
+SELECT 
+    co.id AS "ID Compra", 
+    c.nombre || ' ' || c.apellido AS "Cliente", 
+    pr.nombre AS "Artículo", 
+    pr.precio AS "Precio", 
+    co.cant AS "Cantidad", 
+    (pr.precio * co.cant) AS "Total"
+FROM 
+    compras co
+JOIN 
+    clientes c ON co.cliente = c.id
+JOIN 
+    productos pr ON co.producto = pr.id;
+
 /*
 28) Indicar para cada compra el id de compra y la dirección de envío.
 */
+SELECT 
+    co.id AS "ID Compra", 
+    c.nombre || ' ' || c.apellido AS "Cliente", 
+    d.direccion AS "Dirección de Envío"
+FROM 
+    compras co
+JOIN 
+    clientes c ON co.cliente = c.id
+JOIN 
+    direcciones d ON co.direccion_envio = d.id;
 
 /*
 29) ¿En qué equipo juega Sebastián Villa?
 */
 
+SELECT 
+    equipo.nombre AS "Equipo"
+FROM 
+    jugadores j
+JOIN 
+    equipos equipo ON j.equipo_id = equipo.id
+WHERE 
+    j.nombre = 'Sebastián' AND j.apellido = 'Villa';
+
 /*
 30) Dar una lista de todos los jugadores en equipos rosarinos indicando nombre, apellido y posición.
 */
 
+SELECT 
+    j.nombre AS "Nombre", 
+    j.apellido AS "Apellido", 
+    j.posicion AS "Posición", 
+    e.nombre AS "Equipo"
+FROM 
+    jugadores j
+JOIN 
+    equipos e ON j.equipo_id = e.id
+WHERE 
+    e.ciudad = 'Rosario';
+
 /*
 31) Dar la lista de materias pendientes (no aprobadas) del alumno con DNI 40123456.
 */
+
+SELECT 
+    m.nombre AS "Materia"
+FROM 
+    materias m
+JOIN 
+    alumnos_materias am ON m.id = am.materia_id
+WHERE 
+    am.alumno_dni = 40123456 AND am.estado = 'Pendiente';
 
 /*
 32) Dar la cantidad de materias aprobadas para cada alumno, indicando DNI, nombre, apellido y cantidad de materias
 aprobadas.
 */
 
+SELECT 
+    a.dni AS "DNI", 
+    a.nombre AS "Nombre", 
+    a.apellido AS "Apellido", 
+    COUNT(am.materia_id) AS "Materias Aprobadas"
+FROM 
+    alumnos a
+JOIN 
+    alumnos_materias am ON a.dni = am.alumno_dni
+WHERE 
+    am.estado = 'Aprobada'
+GROUP BY 
+    a.dni, a.nombre, a.apellido;
+
 /*
 33) Dar una lista con los arqueros de cada equipo de primera división indicando nombre de equipo, nombre, apellido
 y altura.
 */
 
+SELECT 
+    e.nombre AS "Equipo", 
+    j.nombre AS "Nombre", 
+    j.apellido AS "Apellido", 
+    j.altura AS "Altura"
+FROM 
+    jugadores j
+JOIN 
+    equipos e ON j.equipo_id = e.id
+WHERE 
+    j.posicion = 'Arquero' AND e.division = 'Primera';
+
 /*
 34) Buscar el arquero más alto de primera división.
 */
+
+SELECT 
+    j.nombre AS "Nombre", 
+    j.apellido AS "Apellido", 
+    j.altura AS "Altura", 
+    e.nombre AS "Equipo"
+FROM 
+    jugadores j
+JOIN 
+    equipos e ON j.equipo_id = e.id
+WHERE 
+    j.posicion = 'Arquero' AND e.division = 'Primera'
+ORDER BY 
+    j.altura DESC
+LIMIT 1;
 
 /*
 35) Buscar los delanteros de Ferro indicando nombre, apellido y edad. Ordenarlos del más joven al más viejo.
 */
 
+SELECT 
+    j.nombre AS "Nombre", 
+    j.apellido AS "Apellido", 
+    j.edad AS "Edad"
+FROM 
+    jugadores j
+JOIN 
+    equipos e ON j.equipo_id = e.id
+WHERE 
+    e.nombre = 'Ferro' AND j.posicion = 'Delantero'
+ORDER BY 
+    j.edad ASC;
+
 /*
 36) Crear un listado de partidos indicando local y visitante y cruzando todos los equipos entre sí.
 */
+
+SELECT 
+    e_local.nombre AS "Local", 
+    e_visitante.nombre AS "Visitante"
+FROM 
+    equipos e_local
+JOIN 
+    equipos e_visitante ON e_local.id != e_visitante.id
+ORDER BY 
+    e_local.nombre, e_visitante.nombre;
 
 /*
 37) Contar cuántos equipos de fútbol hay por cada ciudad.
 */
 
+SELECT 
+    e.ciudad AS "Ciudad", 
+    COUNT(e.id) AS "Cantidad de Equipos"
+FROM 
+    equipos e
+GROUP BY 
+    e.ciudad;
+
 /*
 38) Sumar los campeonatos de los equipos de fútbol por ciudad.
 */
+
+SELECT 
+    e.ciudad AS "Ciudad", 
+    SUM(e.campeonatos) AS "Total Campeonatos"
+FROM 
+    equipos e
+GROUP BY 
+    e.ciudad;
 
 /*
 39) Mostrar la compra promedio por cliente indicando nombre y apellido del cliente.
