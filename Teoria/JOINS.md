@@ -89,7 +89,7 @@ FROM empleados e
 CROSS JOIN departamentos d;
 ```
 
-## 🧠 Diferencias entre Subconsulta y JOIN
+##  Diferencias entre Subconsulta y JOIN
 
 | Característica       | Subconsulta                          | JOIN                                     |
 |----------------------|---------------------------------------|------------------------------------------|
